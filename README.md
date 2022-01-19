@@ -7,7 +7,7 @@ Install dependencies with `npm install`.
 ## Running Webpack Development Server
 
 ```sh
-npm start
+npm start!!
 ```
 
 ## Running Jest Test Framework
