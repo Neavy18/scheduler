@@ -4,63 +4,40 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
-
-const appointments = [
-  {
-    id: 1,
-    time: "12pm",
-  },
-  {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer:{
-        id: 3,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  {
-    id: 3,
-    time: "2pm",
-  },
-  {
-    id: 4,
-    time: "3pm",
-    interview: {
-      student: "Archie Andrews",
-      interviewer:{
-        id: 4,
-        name: "Cohana Roy",
-        avatar: "https://i.imgur.com/FK8V841.jpg",
-      }
-    }
-  },
-  {
-    id: 5,
-    time: "4pm",
-  }
-];
+import { getAppointmentsForDay } from "helpers/selectors";
 
 export default function Application(props) {
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {},
+    interviewers:{}
+  });
 
-  /* INSTRUCTIONS CALLED FOR THESE TO BE PUT AS VALUE AND ONCHANGE BUT IT WAS VERY CONFUSING */
-  const [day, setDay] = useState("Monday");
-  const [days, setDays] = useState([]);
+  const setDay = day => setState({...state, day });
 
-  const appointmentsArr =  appointments.map((appointment) => {
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+
+  const appointmentsArr =  dailyAppointments.map((appointment) => {
     
     return <Appointment key={appointment.id} {...appointment}/>
   });
   
  useEffect(() => {
-   const apiDays = "/api/days"
-   axios.get(apiDays).then(response => {
-     setDays(response.data)
-   })
- }, []);
+  const apiDays = "/api/days"
+  const apiAppoint = "/api/appointments"
+  const apiInterviewers = "/api/interviewers"
+
+  Promise.all([
+   axios.get(apiDays),
+   axios.get(apiAppoint),
+   axios.get(apiInterviewers),
+  
+  ]).then((all) => {
+    console.log("this is all --->", all)
+    setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}))
+  })
+}, []);
 
   return (
     <main className="layout">
@@ -73,9 +50,9 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList
-          days={days}
-          day={day}
-          setDays={setDays}
+          days={state.days}
+          day={state.day}
+          setDay={setDay}
           />
         </nav>
         <img
