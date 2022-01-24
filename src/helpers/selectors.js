@@ -18,3 +18,20 @@ export function getAppointmentsForDay(state, day) {
   }
   return result
 }; 
+
+export function getInterview(state, interview) {
+  let resultObj = {};
+  
+  if(interview){
+    Object.values(state.interviewers).map(inter => {
+        if(inter.id === interview.interviewer){
+          resultObj.student = interview.student
+          resultObj.interviewer = inter
+        }
+        return resultObj
+      });
+      return resultObj;
+    } else {
+      return null
+    }
+  };
