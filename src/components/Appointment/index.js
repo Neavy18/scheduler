@@ -24,8 +24,7 @@ export default function Appointment(props) {
       interviewer
     };
     bookInterview(props.id, interview)
-    .then(() => transition(SHOW))
-    console.log("This should be saved function", props.id, interview)
+    transition(SHOW)
   }
    
   return (
