@@ -5,8 +5,6 @@ import "components/InterviewerList.scss"
 export default function InterviewerList(props) {
 
   const {interviewers, value, onChange} = props; 
-/* ADDED THIS CONST SO STORYBOOK WOULD STOP YELLING BUT THERE IS NO LONGER A CONSOLE LOG? NORMAL?*/
-  //const [value, onChange] = useState("") 
 
   const parsedInterviewerList = interviewers && interviewers.map(
     (interviewer) => {

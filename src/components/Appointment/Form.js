@@ -6,8 +6,6 @@ import InterviewerList from "components/InterviewerList";
 
 import "components/Appointment/styles.scss";
 
-
-
 export default function Form (props) {
   const {onSave, onCancel, interviewers} = props;
 
