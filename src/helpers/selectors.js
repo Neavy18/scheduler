@@ -50,10 +50,10 @@ export function getInterview(state, interview) {
   let resultObj = {};
   
   if(interview){
-    Object.values(state.interviewers).map(inter => {
-        if(inter.id === interview.interviewer){
+    Object.values(state.interviewers).map(interviewer => {
+        if(interviewer.id === interview.interviewer){
           resultObj.student = interview.student
-          resultObj.interviewer = inter
+          resultObj.interviewer = interviewer
         }
         return resultObj
       });

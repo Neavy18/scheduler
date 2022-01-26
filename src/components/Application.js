@@ -15,12 +15,29 @@ export default function Application(props) {
     interviewers:{}
   });
 
+  useEffect(() => {
+    const apiDays = "/api/days"
+    const apiAppoint = "/api/appointments"
+    const apiInterviewers = "/api/interviewers"
+  
+    Promise.all([
+     axios.get(apiDays),
+     axios.get(apiAppoint),
+     axios.get(apiInterviewers)
+    ]).then((all) => {
+      // console.log("this is all[1].data --->", Object.values(all[1].data))
+
+      console.log("this is all[0].data --->", all)
+
+      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}))
+    })
+  }, []);
+
   const setDay = day => setState({...state, day });
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
   const schedule =  dailyAppointments.map((appointment) => {
-
     const interview = getInterview(state, appointment.interview);
     
     return (
@@ -34,22 +51,6 @@ export default function Application(props) {
     );
   });
   
- useEffect(() => {
-  const apiDays = "/api/days"
-  const apiAppoint = "/api/appointments"
-  const apiInterviewers = "/api/interviewers"
-
-  Promise.all([
-   axios.get(apiDays),
-   axios.get(apiAppoint),
-   axios.get(apiInterviewers),
-  
-  ]).then((all) => {
-    console.log("this is all --->", all)
-    setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}))
-  })
-}, []);
-
   return (
     <main className="layout">
       <section className="sidebar">
@@ -73,7 +74,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {dailyAppointments}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
