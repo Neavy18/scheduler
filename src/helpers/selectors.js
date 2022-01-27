@@ -35,7 +35,6 @@ export function getInterviewersForDay(state, day) {
 
   if(state.interviewers) {
     Object.values(state.interviewers).map(interviewer => {
-      console.log("this is interviewer ----->", interviewer.id);
       if(filteredInterviewers.includes(interviewer.id)) {
         result.push(interviewer)
       }
