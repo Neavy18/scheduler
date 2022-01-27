@@ -12,6 +12,7 @@ export default function useApplicationData () {
 
   const setDay = day => setState({...state, day });
 
+
   // --> All axios API calls <--
   useEffect(() => {
     const apiDays = "/api/days"
@@ -28,7 +29,7 @@ export default function useApplicationData () {
   }, []);
 
   // --> Save function <--
-    function bookInterview(id, interview) {
+    function bookInterview(id, interview) {    
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -37,6 +38,7 @@ export default function useApplicationData () {
       ...state.appointments,
       [id]: appointment
     };
+
     return axios.put(`/api/appointments/${id}`, { 
       interview
     }).then(() => {
@@ -56,6 +58,7 @@ export default function useApplicationData () {
           ...state.appointments,
           [id]:appointment
         };
+
     return axios.delete(`/api/appointments/${id}`).then(() => {
       const firstState = { ...state, appointments }
       const remainingSpotsState = spotsRemaining(firstState, firstState.day);
