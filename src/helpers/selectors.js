@@ -23,26 +23,35 @@ export function getAppointmentsForDay(state, day) {
 
 /* ---------> Get INTERVIEWERS for the day <--------- */
 
-export function getInterviewersForDay(state, day) {
+// export function getInterviewersForDay(state, day) {
   
-  let result = [];
+//   let result = [];
 
-  const filteredInterviewers = state.days.map(d => {
-    if(d.name === day){
-      return d.appointments
-    } else {return []}
-  }).flat()
+//   const filteredInterviewers = state.days.map(d => {
+//     if(d.name === day){
+//       return d.appointments
+//     } 
+//   }).flat()
 
-  if(state.interviewers) {
-    Object.values(state.interviewers).map(interviewer => {
-      if(filteredInterviewers.includes(interviewer.id)) {
-        result.push(interviewer)
-      }
-      return result
-    })
+//   if(state.interviewers) {
+//     Object.values(state.interviewers).map(interviewer => {
+//       if(filteredInterviewers.includes(interviewer.id)) {
+//         result.push(interviewer)
+//       }
+//       return result
+//     })
+//   }
+//   return result
+// }; 
+
+export function getInterviewersForDay(state, day) {
+  const filteredDay = state.days.find(item => item.name === day);
+  if (filteredDay && filteredDay.interviewers.length !== 0) {
+    return filteredDay.interviewers.map(app => state.interviewers[app])
+  } else {
+    return [];
   }
-  return result
-}; 
+};
 
 /* ---------> Get INTERVIEWS for the day <--------- */
 export function getInterview(state, interview) {

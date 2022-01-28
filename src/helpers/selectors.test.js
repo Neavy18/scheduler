@@ -1,15 +1,19 @@
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
+// Test Data
 const state = {
   days: [
     {
       id: 1,
       name: "Monday",
+      interviewers: [1, 2, 3],
       appointments: [1, 2, 3]
+
     },
     {
       id: 2,
       name: "Tuesday",
+      interviewers: [4, 5],
       appointments: [4, 5]
     }
   ],
@@ -28,9 +32,8 @@ const state = {
       interview: { student: "Chad Takahashi", interviewer: 2 }
     }
   },
-
   interviewers: {
-    "1": {  
+    "1": {
       "id": 1,
       "name": "Sylvia Palmer",
       "avatar": "https://i.imgur.com/LpaY82x.png"
@@ -42,16 +45,22 @@ const state = {
     },
     "3": {
       id: 3,
-      name: "Mildred Nazir",
-      avatar: "https://i.imgur.com/T2WwVfS.png"
+      name: "Tori Malcolm",
+      avatar: "https://i.imgur.com/Nmx0Qxo.png"
     },
     "4": {
       id: 4,
-      name: "Cohana Roy",
-      avatar: "https://i.imgur.com/FK8V841.jpg"
+      name: "Tori Malcolm",
+      avatar: "https://i.imgur.com/Nmx0Qxo.png"
+    },
+    "5": {
+      id: 5,
+      name: "Tori Malcolm",
+      avatar: "https://i.imgur.com/Nmx0Qxo.png"
     }
   }
-}
+};
+
 /* ---------> Get APPOINTMENTS for the day <--------- */
 
 test("getAppointmentsForDay returns an array", () => {

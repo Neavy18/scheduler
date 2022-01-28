@@ -33,15 +33,14 @@ export default function Appointment(props) {
       interviewer
     };
 
-    if(!interview.interviewer || !interview.student) {
-      alert("You forgot to select an interviewer or input a student name")
-    } else {
+    // if(!interview.interviewer || !interview.student) {
+    //   alert("You forgot to select an interviewer or input a student name")
+    // } else {
       transition(SAVING);
 
       bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
-    }
   }
    
   function deleteInterview (id) {
