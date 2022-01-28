@@ -6,7 +6,7 @@ import InterviewerList from "components/InterviewerList";
 import "components/Appointment/styles.scss";
 
 export default function Form (props) {
-  const {onSave, onCancel, interviewers = []} = props;
+  const {onSave, onCancel, interviewers} = props;
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
@@ -26,10 +26,7 @@ export default function Form (props) {
       setError("student name cannot be blank");
       return;
     }
-    // if (!interviewer) {
-    //   setError("Interviewer name cannot be blank");
-    //   return;
-    // }
+
     setError("")
       onSave(student, interviewer);
   };
