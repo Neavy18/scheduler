@@ -7,10 +7,12 @@ import "components/Appointment/styles.scss";
 
 export default function Form (props) {
   const {onSave, onCancel, interviewers} = props;
+
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
   
+  /* -->Functions to either validate or cancel the Delete interview option and check that student and interviewer were selected (with the reset and error functions as well)<--*/
   const cancel = () => {
     reset();
     onCancel();

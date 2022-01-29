@@ -8,9 +8,11 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode";
+import "components/Appointment/styles.scss"
 
+//All the necessary Appointment components
 export default function Appointment(props) {
-  const { id, time, interview, bookInterview, cancelInterview} = props;
+  const { id, time, interview, interviewers, bookInterview, cancelInterview} = props;
 
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
@@ -24,24 +26,21 @@ export default function Appointment(props) {
 
 
   const { mode, transition, back } = useVisualMode(
-    props.interview ? SHOW : EMPTY
+    interview ? SHOW : EMPTY
   );
-
+  
+  //Save function with the SAVING load screen and the book interview
   function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     };
-
-    // if(!interview.interviewer || !interview.student) {
-    //   alert("You forgot to select an interviewer or input a student name")
-    // } else {
-      transition(SAVING);
-
-      bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
-      .catch(error => transition(ERROR_SAVE, true));
-  }
+    transition(SAVING);
+    //Located in the hooks folder under useApplicationData.js
+    bookInterview(id, interview)
+    .then(() => transition(SHOW))
+    .catch(error => transition(ERROR_SAVE, true));
+  };
    
   function deleteInterview (id) {
     transition(DELETING, true);
@@ -71,7 +70,7 @@ export default function Appointment(props) {
       />}
 
       {mode === CREATE && <Form 
-        interviewers = {props.interviewers}
+        interviewers = {interviewers}
         onSave = {save}
         onCancel = {back}
       />}
@@ -89,11 +88,10 @@ export default function Appointment(props) {
       {mode === EDIT && <Form 
         student={interview.student}
         interviewer={interview.interviewer.id}
-        interviewers={props.interviewers}
+        interviewers={interviewers}
         onSave={save}
         onCancel={back}
-      />
-      }
+      />}
 
       {mode === ERROR_SAVE && <Error 
         message = {"This appointment could not be saved, please try again"}

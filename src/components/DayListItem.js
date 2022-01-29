@@ -17,6 +17,7 @@ export default function DayListItem(props) {
   );
 }
 
+//Display how many spots are remaining
 const formatSpots = (num) => {
   if (num === 0) {
     return "no spots remaining"
