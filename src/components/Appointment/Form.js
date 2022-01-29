@@ -39,7 +39,7 @@ export default function Form (props) {
   return (
   <main className="appointment__card appointment__card--create">
     <section className="appointment__card-left">
-      <form onSubmit={event => event.preventDefault()}autoComplete="off">
+      <form autoComplete="off" onSubmit={event => event.preventDefault()}>
         <input
           className="appointment__create-input text--semi-bold"
           name="name"
@@ -51,7 +51,7 @@ export default function Form (props) {
         />
         <section className="appointment__validation">{error}</section>
         <InterviewerList 
-        interviewers={props.interviewers} 
+        interviewers={interviewers} 
         value={interviewer} 
         onChange={setInterviewer}
       />
@@ -67,35 +67,3 @@ export default function Form (props) {
   );
 }
 
-
-
-
-
-// const [student, setStudent] = useState(props.student || "");
-// const [interviewer, setInterviewer] = useState(props.interviewer || null);
-
-// export default function Form (props) {
-//   return (
-//   <main className="appointment__card appointment__card--create">
-//     <section className="appointment__card-left">
-//       <form autoComplete="off">
-//         <input
-//           className="appointment__create-input text--semi-bold"
-//           name="name"
-//           type="text"
-//           placeholder="Enter Student Name"
-//           onChange={event => setName(event.target.value)}
-//         />
-//       </form>
-//       <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer}
-//       />
-//     </section>
-//     <section className="appointment__card-right">
-//       <section className="appointment__actions">
-//         <Button danger {/* your code goes here */}>Cancel</Button>
-//         <Button confirm {/* your code goes here */}>Save</Button>
-//       </section>
-//     </section>
-//   </main>
-//   );
-// }
