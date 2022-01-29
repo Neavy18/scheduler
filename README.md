@@ -1,6 +1,16 @@
 # Interview Scheduler
 
+  Useful and simple interview scheduler. It offers various interviewers options for each input and the possibility to edit or delete an appointment. Created using React and Storybook and tested with Jest and Cypress.
+
 ## Setup
+
+  "Dependencies":
+    "axios",
+    "classnames",
+    "react",
+    testing-library/jest-dom",
+    "@testing-library/react-hooks"
+    "react-test renderer"
 
 Install dependencies with `npm install`.
 
